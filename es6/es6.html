@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <script>
+        let arrayLike = {
+            '0':'a',
+            '1':'b',
+            '2':'c',
+            '3':'d',
+            length:4
+        };
+        var arr1 = [].slice.call(arrayLike);
+        console.log(arr1);
+        let arr2 = Array.from(arrayLike);
+        console.log(arr2);
+        var arr3 = Array.from('hello');
+        console.log(arr3);
+        let nameSet = new Set(['a','b']);
+        var arr4 = Array.from(nameSet);
+        console.log(arr4);
+        const a1 = [1,2];
+        const[...a2] = a1;
+        console.log(a2);
+        var a4 = Array.from([1, 2, 3], (x) => x*x);
+        console.log(a4);
+
+        // for(let elem of ['a','b'].values()){
+        //     console.log(elem);
+        // }
+        // for (let elem of ['a', 'b'].values()) {
+        //   console.log(elem);
+        // }
+        // for (let elem of ['a', 'b'].values()) {
+        //   console.log(elem);
+        // }
+        for (let [index, elem] of ['a', 'b'].entries()) {
+          console.log(index, elem);
+        }
+        var foo = 'bar';
+        var baz = {foo};
+        function getPoint() {
+            var x = 1;
+            var y = 10;
+            return {x,y};
+        }
+        var a = getPoint();
+        var source1 = {a:1};
+        var source2 = {b:2};
+        var target = {};
+        Object.assign(target,source1,source2);
+        let obj = {a: 1};
+        var obj1 = Object.assign(obj, undefined); // true
+        Object.assign(obj, null) === obj // true
+        console.log(obj1);
+        console.log(Object.is(obj,obj1));
+        var m =[1,2];
+        var n =[3,4];
+        var g = Array.of(...m,...n);
+        console.log(g);
+    </script>
+</body>
+</html>

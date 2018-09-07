@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <script>
+        //异步加载图片
+        const loadUrl = url => new Promise((resolved,rejected) => {
+            let img = new Image();
+            img.onload = () => resolved(img);
+            img.onerror = () => rejected(new Error('can not load images at' + url));
+            img.src = url
+        })
+        //基于jq的ajax请求
+        const myAjax = (type='GET',data={},url) => {
+            new Promise((resolved,rejected) => {
+                $.ajax({
+                    type,
+                    url,
+                    data,
+                    success:data => resolved(data),
+                    error:err => rejected(err)
+                })
+            })
+        };
+    </script>
+</body>
+</html>

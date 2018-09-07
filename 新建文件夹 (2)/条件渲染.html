@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p v-if = "items > 10">{{ items }}个有现货</p>
+        <p v-else-if = "items > 1">所剩不多了，快抢购</p>
+        <p v-else>没有库存了</p>
+        <!-- 不想增加多余的标签可以用template标签 -->
+        <template v-if = "items > 40">
+            <p>注意事项</p>
+            <p>库存过多打八折！！</p>
+        </template>
+        {{ items }}
+        <button type="" v-on:click="items -= 5 ">click me!!!</button>
+        <button type="" v-on:click="items += 5 ">click me2!!!</button>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                items: 20
+            }
+        })
+    </script>
+</body>
+</html>

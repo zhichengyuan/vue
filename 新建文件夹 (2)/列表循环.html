@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+            <div v-for = "item in persons" v-bind:key="item.id">
+                {{item.name}} {{item.id}}<input type="" name="">
+            </div>
+            <button v-on:click = "add">click me!</button>
+            <button v-on:click = "reverse">click me!</button>
+    </div>
+    <script>
+        //双向数据绑定
+        new Vue({
+            el:"#app",
+            data : {
+                movives:["要命","啊","怎么"],
+                persons:[{
+                    name:"马",
+                    id:1
+                },{
+                    name:"小",
+                    id:2
+                },{
+                    name:"胖",
+                    id:3
+                }],
+                xingming : {
+                    name:'ma',
+                    firstname:'xiaopang'
+                },
+                numbers : [1,2,3,4,5]
+            },
+            methods : {
+                changeNumber:function() {
+                    Vue.set(this.numbers,1,10);
+                    this.numbers[1] = 10;
+                    alert(this.numbers[1]);
+                },
+                add:function () {
+                    this.persons.push({
+                        id:4,
+                        name:"我"
+                    })
+                },
+                reverse:function () {
+                    this.persons.reverse();
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <!-- <div id="app">
+        <blog-post
+          v-for="post in posts"
+          v-bind:key="post.id"
+          v-bind:post="post"
+        ></blog-post>
+    </div> -->
+    <div id="example">
+        <input type="text" v-model="items.type1" ref="type1" />
+        <input type="text" v-model="items.type2" ref="type2"/>
+        <div class="show">输入框一的内容：{{items.type1}}</div>
+        <div class="show">输入框二的内容：{{items.type2}}</div>
+        <button @click="items.count++" >click me</button>
+        <div>
+            {{items.count}}
+        </div>
+    </div>
+    <div id="blog-post-events-dome">
+        <div :style="{ fontSize: postFontSize + 'em'}">
+            <blog-post
+                v-for="post in posts"
+                :key="post.id"
+                :post="post"
+                v-on:enlarge-text="onEnlargeText"
+                v-on:large-text="postFontSize -= 0.1"
+            ></blog-post>
+        </div>
+        <custom-input
+          v-bind:value="searchText"
+          v-on:input="searchText = $event"
+        ></custom-input>
+        <div>
+            {{searchText}}
+        </div>
+        <alert-box>
+          Something bad happened.
+        </alert-box>
+    </div>
+    <script>
+        Vue.component('alert-box', {
+          template: `
+            <div class="demo-alert-box">
+              <strong>Error!</strong>
+              <slot></slot>
+            </div>
+          `
+        })
+        Vue.component('custom-input', {
+          props: ['value'],
+          template: `
+            <input
+              v-bind:value="value"
+              v-on:input="$emit('input', $event.target.value)"
+            >
+          `
+        })
+        Vue.component('blog-post', {
+          props: ['post'],
+          template: `
+            <div class="blog-post">
+              <h3>{{ post.title }}</h3>
+              <button @click="$emit('enlarge-text', 0.1)">
+                Enlarge text
+              </button>
+              <button @click="$emit('large-text')">
+                Enlarge
+              </button>
+              <div v-html="post.content"></div>
+            </div>
+          `
+        })
+        new Vue({
+            el:'#blog-post-events-dome',
+            data:({
+                posts:[
+                    {id:1,title:'我是谁！！！',content:'qqqq'},
+                    {id:2,title:'我在那？？？',content:'eee'},
+                    {id:3,title:'qqqqqqqq???',content:'wwww'}
+                ],
+                postFontSize:1,
+                searchText:'你好'
+            }),
+            methods: {
+              onEnlargeText: function (enlargeAmount) {
+                console.log(enlargeAmount);
+                this.postFontSize += enlargeAmount
+              }
+            },
+            watch:{
+                searchText:function(val,oldval){
+                            console.log(val);
+                        }
+            }
+        })
+        var example1 = new Vue({
+              el: '#example',
+              data: {
+                items: {
+                    type1:'第一个输入框',
+                    type2:'第二个输入框',
+                    count:'1'
+                }
+              },
+               ready:function(){
+
+                },
+                watch:{
+                    items:{
+                        handler:function(val,oldval){
+                            console.log(this.$refs);
+                            console.log(this.$refs.type1.value);
+                            console.log(this.$refs.type2.value);
+                        },
+                        deep:true
+                    }
+                },
+              methods:{
+
+              }
+            })
+        // new Vue({
+        //     el:'#app',
+        //     data:{
+        //         posts:[
+        //             {id:1,title:'我是谁！！！',content:'qqqq'},
+        //             {id:2,title:'我在那？？？',content:'eee'},
+        //             {id:3,title:'qqqqqqqq???',content:'wwww'}
+        //         ]
+        //     }
+        // });
+
+    </script>
+</body>
+</html>

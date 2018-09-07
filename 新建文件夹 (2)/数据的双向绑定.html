@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ value }}<input type="text" name="" v-model.lazy = "value">
+
+    </div>
+    <div id="app2">
+        {{html}}
+        <div v-html="html"></div>
+        <!-- v-once只渲染一次 -->
+        <div v-once>
+            {{ message }}
+        </div>
+        {{ message }}
+        <button type="" v-on:click = "message = '123'">click me!!!</button>
+    </div>
+    <script>
+        //双向数据绑定
+        new Vue({
+            el:"#app",
+            data : {
+                value : 2
+            }
+        })
+        //插入dom节点，注意慎重使用，可能会有跨域脚本攻击
+        new Vue({
+            el:"#app2",
+            data : {
+                html : "<h2>hello</h2>",
+                message: "nihao!"
+            }
+        })
+    </script>
+</body>
+</html>

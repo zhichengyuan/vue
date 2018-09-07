@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <!-- <div id="app">
+        <input type="text" v-model = "serachInfo">
+        <div v-if="showSearching">
+            正在搜索。。。
+        </div>
+    <ul>
+        <li v-for="item in result">{{item}}</li>
+    </ul>
+    </div> -->
+    <div id="app1">
+        <ul>
+            <li v-for="movie in formateMovie">{{movie}}</li>
+        </ul>
+        <button v-on:click="addMovie">添加电影</button>
+    </div>
+    <script>
+        // new Vue({
+        //     el:"#app",
+        //     data: {
+        //         serachInfo: "",
+        //         showSearching:false,
+        //         result : []
+        //     },
+        //     watch : {
+        //         serachInfo : function (e) {
+        //             this.showSearching = true;
+        //             var that = this;
+        //             setTimeout(function() {
+        //                 that.result = ["html", "css","js"];
+        //                 that.showSearching = false;
+        //             },500)
+        //         }
+        //     }
+        // })
+        new Vue({
+            el:"#app1",
+            data : {
+                movies :[{
+                    name:'捉妖记',
+                    year:2018
+                },{
+                    name:'星球大战8',
+                    year:2018
+                },{
+                    name : "唐人街探案2",
+                    year:2018
+                }]
+            },
+            computed : {
+                formateMovie : function() {
+                    return this.movies.map(function (movie) {
+                        return movie.name + " (" + movie.year + ")";
+                    })
+                }
+            },
+            methods : {
+                addMovie : function() {
+                    this.movies.push({
+                        name : "马小胖",
+                        year : 3017
+                    })
+                }
+            },
+            watch : {
+                movies : function (newV) {
+                    alert("我添加了" + newV[newV.length-1].name);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

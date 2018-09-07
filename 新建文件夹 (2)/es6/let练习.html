@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <script>
+        var arr = [];
+        for(var i=0;i<10;i++) {
+            (function (j) {
+                arr[j] = function () {
+                    console.log(j);
+                }
+            })(i)
+        }
+        console.log(i);
+        for(let i=10; i<20;i++) {
+            arr[i] = function() {
+                console.log(i);
+            }
+        }
+        arr[3] ();
+        arr[13] ();
+        const Max = 999;
+        {
+            const Max = 1
+            console.log(Max);
+        }
+        console.log(Max);
+        let {bar,foo} = {bar:123, foo:234};
+        console.log(bar,foo);
+    </script>
+</body>
+</html>

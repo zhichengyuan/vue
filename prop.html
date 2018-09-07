@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <blog-post :post-title="title" :post-likes="likes"></blog-post>
+        <!-- <blog-post v-bind:author="{ name: 'Veronica', company: 'Veridian Dynamics' }"></blog-post> -->
+        <base-input
+          v-model="username"
+          class="username-input"
+          placeholder="Enter your username"
+        ></base-input>
+        <base-layout>
+          <h1 slot="header">Here might be a page title</h1>
+
+          <p>A paragraph for the main content.</p>
+          <p>And another one.</p>
+
+          <p slot="footer">Here's some contact info</p>
+        </base-layout>
+    </div>
+
+    <script>
+        Vue.component('base-layout',{
+            template:`<div class="container">
+                          <header>
+                            <slot name="header"></slot>
+                          </header>
+                          <main>
+                            <slot></slot>
+                          </main>
+                          <footer>
+                            <slot name="footer"></slot>
+                          </footer>
+                        </div>`
+        })
+        Vue.component('blog-post',{
+            props:['author','postTitle','postLikes'],
+            template:'<h3>{{ postTitle}}{{postLikes}}</h3>'
+        })
+        Vue.component('base-input', {
+          inheritAttrs: false,
+          props: ['label', 'value'],
+          template: `
+            <label>
+              {{ label }}
+              <input
+                v-bind="$attrs"
+                v-bind:value="value"
+                v-on:input="$emit('input', $event.target.value)"
+              >
+            </label>
+          `
+        })
+        new Vue({
+            el:'#app',
+            data:{
+                title:"你好！！！",
+                likes:'马小胖',
+                username:'苑志成'
+            }
+        })
+    </script>
+</body>
+</html>

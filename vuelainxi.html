@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <span v-bind:title="message">
+            鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span>
+    </div>
+    <div id="app1">
+        <ol>
+            <li v-for="todo in todos">
+                {{todo.text}}
+            </li>
+        </ol>
+    </div>
+    <div id="app2">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage"></button>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message: '页面加载于 ' + new Date().toLocaleString()
+            }
+        })
+        var app1 = new Vue({
+            el:'#app1',
+            data:{
+                todos:[
+                    {text: '学习'},
+                    {text: '进步'},
+                    {text: '喜欢你'}
+                ]
+            }
+        })
+        var app2 = new Vue({
+            el:'#app2',
+            data:{
+                message: 'wo xi huan ni maxiaopang'
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+</html>

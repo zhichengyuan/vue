@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="vue.js"></script>
+    <style type="text/css" media="screen">
+        .shape{
+            height:150px;
+            width:150px;
+            float:left;
+            margin:10px;
+        }
+        .circle{
+            background: red;
+            border-radius:50%;
+        }
+        .square{
+            background-color:blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-for="shape in shapes" class = "shape" v-bind:class="{circle:shape.isRound,square : !shape.isRound}">
+
+        </div>
+    </div>
+    <script>
+      var app = new Vue({
+        el:'#app',
+        data:{
+            shapes : [
+                {isRound : true},
+                {isRound : false}
+            ]
+        },
+        methods:{
+
+        }
+      })
+
+    </script>
+</body>
+</html>

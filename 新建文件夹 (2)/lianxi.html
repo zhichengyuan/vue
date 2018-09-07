@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-bind:title="msg">
+            {{ msg | firstWorldUp | removeSpace}}
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:"holle world!!!"
+            },
+            filters: {
+                firstWorldUp : function(val){
+                    val = val.toString();
+                    var arr = val.split(" ");
+                    var newarr = arr.map(function (value) {
+                        return value.charAt(0).toUpperCase() + value.slice(1);
+                    })
+                    return newarr.join(" ");
+                },
+                removeSpace : function (val) {
+                    return val.toString().replace(/ /g, "");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

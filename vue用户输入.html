@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src=https://cdn.jsdelivr.net/npm/vue/dist/vue.js></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <button type="" v-on:click = "rever seMessage">逆转消息</button>
+    </div>
+    <!-- 双向数据绑定 v-model-->
+    <div>
+        <div id="app1">
+            <p>{{message}}</p>
+            <input v-model="message">
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message: "wo xi huan ni maxiaopang"
+            },
+            methods:{
+                reverseMessage:function () {
+                    this.message = this.message.split("").reverse().join('');
+                }
+            }
+        })
+        var app1 = new Vue({
+            el:"#app1",
+            data:{
+                message:"maxiaopang"
+            }
+        })
+    </script>
+</body>
+</html>

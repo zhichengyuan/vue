@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的vue购物车</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="vue.js"></script>
+    <style type="text/css" media="screen">
+        h3{
+        text-align: center;
+}
+.left{
+    margin-left: 14%;
+}
+.item{
+    text-align: center;
+    padding: 3%;
+}
+.add{
+    margin-left: 15%;
+}
+.off{
+    background-color: lightgrey;
+    border: 1px solid lightgrey;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <template v-if="data.length">
+            <h3>我的购物车：</h3>
+            <div class="product">
+                <div class="item">
+                    <span class="btn btn-default">商品名称</span>
+                    <span class="btn btn-default left">商品单价</span>
+                    <span class="btn btn-default left">商品数量</span>
+                    <span class="btn btn-default left">操作</span>
+                </div>
+                <div class="item" style="padding:5%;border: 1px solid black" v-for="(item,index) in data">
+                    <span class="btn btn-default">{{item.name}}</span>
+                    <span class="btn btn-default left" style="margin-left: 18%">{{item.price}}</span>
+                    <span>
+                        <em class="btn btn-primary add" v-on:click="add(index)" :class="{off:item.count==11}">+</em>
+                                    {{item.count}}
+                        <em class="btn btn-primary reduce" v-on:click="reduce(index)" :class="{off:item.count==1}">-</em>
+                    </span>
+                    <span class="btn btn-danger left" v-on:click="remove(item.id)">移除</span>
+                </div>
+            </div>
+            <h2>清单：</h2>
+            <span class="btn btn-primary">商品总价：{{price}}</span>
+        </template>
+        <template v-else>
+            <div class="jumbotron">
+                <h1>您的购物车空了</h1>
+                <p>是否去重新挑选</p>
+                <p><a class="btn btn-primary btn-lg" href="#" role="button">重新挑选</a></p>
+            </div>
+        </template>
+    </div>
+</body>
+<script>
+var data = [
+    {
+        name:'IPhone 6',
+        price:5466,
+        id:1,
+        count:1
+    },
+    {
+        name:'IMac',
+        price:7466,
+        id:2,
+        count:1
+    },
+    {
+        name:'iPad',
+        price:5400,
+        id:3,
+        count:1
+    }
+]
+    new Vue({
+        el:'.container',
+        data:{
+            data:data
+        },
+        computed:{
+          price:function () {
+              var price = 0;
+              for(var i=0;i<this.data.length;i++){
+                  var self = this.data[i];
+                  price += self.count * self.price;
+              }
+              return price;
+          }
+        },
+        methods:{
+            add:function ($index) {
+                var self = this.data[$index];
+                if(self.count >10){
+                    return false;
+                }
+                self.count++;
+            },
+            reduce:function($index){
+                var self = this.data[$index];
+                if(self.count <= 1){
+                    return false
+                }
+                self.count--;
+            },
+            remove:function(item){
+                console.log(item);
+                var length = this.data.length;
+                console.log(length);
+                for(i = 0;i < length ; i++) {
+                    console.log(i);
+                    console.log(this.data[i]);
+                    if(this.data[i].id == item) {
+                        console.log(i);
+                        _arr = this.data.splice(i, 1); //删除下标为i的元素
+                        return _arr;
+                        this.data = _arr;
+                    }
+                }
+
+                // this.data.data.$remove(item);
+            }
+        }
+    })
+</script>
+</html>

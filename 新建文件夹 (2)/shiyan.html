@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <div style="width:100px;height:100px;background:black;" v-for="(list,index) in child" :data-value="list.name" v-on:click="btnclick(index,list.name)">
+            {{list.name}}
+        </div>
+        <div style="width:100px;height:100px;background:black;" v-if="seen">
+
+        </div>
+
+    </div>
+    <div id="example">
+          <p>Original message: "{{ message }}"</p>
+          <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    </div>
+    <div id="app1">
+        <ul>
+            <li v-for="n in evenNumbers">{{n}}</li>
+        </ul>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                child:[{name:2},{name:3},{name:4}],
+                seen:false
+            },
+            methods:{
+                btnclick : function(index,name) {
+                    // console.log('cht',index);
+                    // console.log('chaname',name);
+                    console.log(index,name);
+                }
+            }
+        });
+        var my= new Vue({
+          el: '#example',
+          data: {
+            message: 'Hello'
+          },
+          computed: {
+            // 计算属性的 getter
+            reversedMessage: function () {
+              // `this` 指向 vm 实例
+              return this.message.split('').reverse().join('')
+            }
+          }
+        })
+        console.log(my.reversedMessage) // => 'olleH'
+        my.message = 'Goodbye'
+        console.log(my.reversedMessage) // => 'eybdooG'
+        var arr = new Vue({
+            el:'#app1',
+            data: {
+              numbers: [ 1, 2, 3, 4, 5 ]
+            },
+            computed: {
+              evenNumbers: function () {
+                return this.numbers.filter(function (number) {
+                  return number % 2 === 0
+                })
+              }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button type="" v-on:click.stop = "showsome(122333,$event)">click me!</button>
+        <a href="https://ke.qq.com/user/index/index.html#cid=278458&term_id=100329627" v-on:click.prevent>link me!!!!</a>
+    </div>
+    <div id="app1">
+        <input type="text" name="" v-on:keyup.enter.space = "keyup">
+        <input type="text" name="" v-on:keyup.shift = "shift">
+    </div>
+    <div id="app2">
+        <input type="text" v-on:keyup= "changename"/>
+        output : {{ name }}
+
+        <input type="text" name="" v-on:keyup.enter.space = "name = $event.target.value">
+        output : {{ name }}
+
+        <form >
+            <input type="submit" >
+        </form>
+    </div>
+</body>
+
+<script>
+
+    new Vue({
+        el:"#app",
+        methods : {
+            showsome : function(msg,event) {
+                console.log(msg);
+                alert("show something")
+            }
+        }
+    });
+    new Vue({
+        el:"#app1",
+        methods : {
+            keyup : function(event) {
+                console.log(333);
+            },
+            shift : function() {
+                console.log("nihao");
+            }
+        }
+    });
+    new Vue({
+        el:"#app2",
+        data : {
+            name : "hello"
+        },
+        methods : {
+            changename : function(event) {
+                console.log(event);
+                this.name = event.target.value;
+            }
+        }
+    })
+
+</script>
+</html>

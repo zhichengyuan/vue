@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+            <input type="" name="" v-model="passwored">
+            <p>字符大于8个</p>
+            <p>1-8个字符</p>
+            <p>没有字符</p>
+            <ol>
+                <li v-for="sub in subs">
+                    {{sub.name}}
+                    <ul>
+                        <li v-for="item in sub.sub">
+                            {{item}}
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                passwored:'123',
+                str:'',
+                subs:[{
+                    name:'javascript', sub: ["vue","react","angular"]
+                },{
+                    name:'database', sub: ["mysql","mongdb","sqlsever"]
+                },{
+                    name:'system', sub: ["windows","linx","angular"]
+                }]
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport"/>
+<title>JQ滚动到底部自动加载</title>
+
+<style>
+        html,body,ul,li{margin:0;padding:0;border:0;vertical-align:baseline;}
+        body,html{line-height:1;font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif;font-size:16px;color:#333;}
+        ol,ul{list-style:none;}
+        a{text-decoration:none;}
+        body{background:#f2f2f2;}
+        .prolist li{height:50px;line-height:50px;border-bottom:1px solid #f8f8f8;background:#fff;padding:0 15px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
+        .prolist li a{color:#333;font-size:16px;}
+
+        /**加载效果旋转**/
+        @-webkit-keyframes rotate {0% {-webkit-transform: rotate(0deg);transform: rotate(0deg);}100% {-webkit-transform: rotate(360deg);transform: rotate(360deg);}}
+        @keyframes rotate {0% {-webkit-transform: rotate(0deg);transform: rotate(0deg);}100% {-webkit-transform: rotate(360deg);transform: rotate(360deg);}}
+
+        .loadmore {display:block;line-height: 50px;text-align:center;color:#ccc;font-size:14px;}
+        .loadmore span{height:20px;width:20px;border-radius:100%;display:inline-block;margin:10px;border:2px solid #f60;border-bottom-color: transparent;vertical-align: middle;-webkit-animation: rotate 1.1s infinite linear;animation: rotate 1.1s infinite linear;}
+        .loadover{position:relative;margin:0 12px;padding:24px 0;height:20px;line-height:20px;color:#909090;text-align: center;}
+        .loadover span{position:relative;display:inline-block;padding:0 6px;height:20px;background:#F2F2F2;z-index:2}
+        .loadover:after {content:''position: absolute;left: 0;top:50%;width: 100%;height:1px;background:#DCDCDC;z-index:1;display:block;}
+    </style>
+</head>
+
+<!-- 产品列表 开始-->
+<ul class="prolist container">
+    <li>好经典人生语句，经典得让人心痛！</li>
+    <li>好经典人生语句，经典得让人心痛！</li>
+
+    <li>好经典人生语句，经典得让人心痛！</li>
+
+    <li>好经典人生语句，经典得让人心痛！</li>
+
+    <li>好经典人生语句，经典得让人心痛！</li>
+    <li>好经典人生语句，经典得让人心痛！</li>
+    <li>好经典人生语句，经典得让人心痛！</li>
+    <li>好经典人生语句，经典得让人心痛！</li>
+
+    <li>好经典人生语句，经典得让人心痛！</li>
+
+
+
+</ul>
+<!-- 产品列表 结束 -->
+
+<script src="jquery.js"></script>
+
+<script>
+
+   var pageNumber=1;
+   var finished = 0;
+   var lastPage=false;
+
+   var sover=0;
+
+   //如果未满一屏，自动补全一屏
+
+   var setdefult=setInterval(function (){
+    if(sover==1)
+        clearInterval(setdefult);
+    else if($(".prolist").height()<$(window).height())
+        loadmore($(window));
+    else
+        clearInterval(setdefult);
+},500);
+
+//加载完
+
+function loadover(){
+if(sover==1){
+   var overtext="亲～没有更多内容了";
+   $(".loadmore").remove();
+       if($(".loadover").length>0)
+     {
+        $(".loadover span").eq(0).html(overtext);
+      }
+else
+     {
+       var txt='<div class="loadover"><span>'+overtext+'</span></div>'
+       $("body").append(txt);
+      }
+   }
+}
+
+//加载更多
+var vid=0;
+function loadmore(obj){
+    if(finished==0 && sover==0){
+         var scrollTop = $(obj).scrollTop();
+         var scrollHeight = $(document).height();
+         var windowHeight = $(obj).height();
+       if($(".loadmore").length==0){
+           var txt='<div class="loadmore"><span class="loading"></span>加载中..</div>'
+           $("body").append(txt);
+      }
+ if (scrollHeight - scrollTop - windowHeight <=100 ) {
+//此处是滚动条到底部时候触发的事件，在这里写要加载的数据，或者是拉动滚动条的操作
+//防止未加载完再次执行
+ console.log(scrollHeight,windowHeight,);
+        console.log('99999999');
+        finished=1;
+        // var result = "";
+        // for(var i = 0; i < 8; i++){
+        // vid++;
+        // result+='<li>好经典人生语句，经典得让人心痛！</li>';
+        //         }
+        // setTimeout(function(){
+        //    //$(".loadmore").remove();
+        // $('.container').append(result);
+        //      pageNumber+=1;
+        //      finished=0;
+        //      //最后一页
+        //      if(lastPage==true){
+        //           sover=1;
+        //           loadover();
+        //       }
+        //  },1500);
+        $.ajax({
+              type: 'GET',
+              url: 'http://47.94.221.78:83/orders/querybyappid?appid=2&pageNumber='+ pageNumber +'&pageSize=&paystatus=0',
+              dataType: 'json',
+              success: function(data){
+                console.log(data);
+                lastPage = data.paginate.lastPage;
+                 if(lastPage==true){
+                    sover = 1;
+                    loadover();
+                    if (pageNumber == 1) {
+                         $("#no_msg").removeClass("hidden");
+                         $(".loadover").remove();
+                    }
+                 }else{
+                  console.log(111);
+                   var result = ''
+                   for(var i = 0; i < data.paginate.list.length; i++){
+                        result+='<li>好经典人生语句，经典得让人心痛！</li>';
+                }
+                setTimeout(function(){
+                    $(".loadmore").remove();
+                    console.log(333);
+                    $('.container').append(result);
+                         pageNumber+=1;
+                         finished=0;
+                         //最后一页
+                         if(lastPage==true){
+                             sover=1;
+                             loadover();
+                         }
+                      },3000);
+                }
+               },
+              error: function(xhr, type){
+                sover=1
+                alert('Ajax error!');
+              }
+        });
+      }
+    }
+  }
+ //页面滚动执行事件
+    $(window).scroll(function (){
+        loadmore($(this));
+    });
+
+</script>

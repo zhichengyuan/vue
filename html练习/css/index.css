@@ -1,0 +1,353 @@
+/* CSS Document */
+html, body, div, span, object, iframe,h1, h2,
+h3, h4, h5, h6, p, blockquote, pre,abbr, address, cite, code,del, dfn,
+em, img, ins,kbd, q, samp,small, strong, sub, sup, var,b, i,dl, dt, dd,
+ol, ul, li,fieldset, form, label, legend,table, caption, tbody,
+tfoot,thead,tr, th, td,article, aside, canvas, details, figcaption,
+figure, footer, header, hgroup, menu, nav, section, summary,time, mark,
+audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+    outline-style:none;/*FF*/
+}
+
+html,body {
+    width: 100%;
+}
+
+a{
+
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+input, select {
+    vertical-align:middle;
+}
+
+/*css为clearfix，清除浮动*/
+.clearfix::before,
+.clearfix::after{
+    content: "";
+    height: 0;
+    line-height: 0;
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+.clearfix:after{clear:both;}
+.clearfix{
+    *zoom:1;/*IE/7/6*/
+}
+.wrapper{
+    /* position:relative; */
+    width:100%;
+    background-color:#ccc;
+}
+.wrapper .top {
+    width:100%;
+    height:32px;
+    color:#fff;
+    font-size:12px;
+}
+.top .top-left{
+    width:95%;
+    height:100%;
+    float: left;
+    background-color:#333;
+}
+.top-left ul{
+    list-style:none;
+    height:32px;
+}
+.top-left a{
+    color:#fff;
+}
+.top-left ul li {
+    display:inline-block;
+    line-height:32px;
+    text-align:center;
+    padding-left:15px;
+}
+.top-left .ul-right li:last-child {
+    padding-right:15px;
+}
+.top-left .ul-left, ul li{
+    float: left;
+}
+.top-left .ul-right{
+    float: right;
+}
+.top .top-right{
+    width:5%;
+    height:100%;
+    float: right;
+    background:blue;
+}
+.top-right a{
+    display:inline-block;
+    text-decoration:none;
+    width:100%;
+    height:32px;
+    color:#fff;
+    text-align: center;
+    line-height:32px;
+}
+.top-a:link{
+    text-decoration:none;
+}
+/* 搜索部分 */
+.wrapper .main{
+    position: relative;
+    width:100%;
+    height:262px;
+}
+.main-center{
+    position:absolute;
+    width:1000px;
+    height:100%;
+    left:50%;
+    transform:translate(-50%, 0) ;
+}
+.main-center-n{
+    position:absolute;
+    width:641px;
+    height:100%;
+    left:50%;
+    transform:translate(-50%,0);
+}
+.main-center-n .login{
+    position:relative;
+    width:100%;
+    height:150px;
+    background-color: #ccc;
+}
+.login-img{
+    position:absolute;
+    width: 270px;
+    height:129px;
+    left: 50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:url(../img/baidu.png);
+    background-size: 100%;
+}
+.main-center-n .search-input{
+    position:relative;
+    width:100%;
+    height:112px;
+    background:#ccc;
+}
+.wrapper-search{
+    position:absolute;
+    width:100%;
+    height:40px;
+}
+.search-input .centont{
+    display:inline-block;
+    float: left;
+    width:537px;
+    height:40px;
+    box-sizing:border-box;
+    background-color:#fff;
+}
+input:focus { outline: none; }
+.search-input-left,.search-input-right{
+    float: left;
+}
+.search-input-right{
+    float: left;
+}
+.search-input-right{
+    width:37px;
+    height:100%;
+}
+.search-input-left input{
+    position:absolute;
+    padding-left:10px;
+    width:500px;
+    top:50%;
+    transform:translate(0,-50%);
+    border:none;
+}
+.wrapper-search .submit-btn{
+    float: left;
+    width:102px;
+    height:100%;
+}
+.submit-btn .btn{
+    display:inline-block;
+    width:100%;
+    line-height:40px;
+    height:40px;
+    border:none;
+    color:#fff;
+    background: #38f;
+}
+/* 中间内容部分 */
+.content{
+     position:relative;
+    width:893px;
+    height:auto;
+    left:50%;
+    transform:translate(-50%,0);
+    background-color:#bbb;
+}
+.content-top{
+    width:100%;
+    height:40px;
+    box-sizing:content-box;
+    border-bottom:1px black solid;
+}
+.content-top-menu{
+    float: left;
+    width:94%;
+    height:100%;
+}
+.content-top-menu .menu{
+    float: left;
+    // display:inline-block;
+    // height:100%;
+
+}
+.content-top-menu .menu a{
+    display:inline-block;
+    line-height:40px;
+    height:100%;
+    color:#000;
+    text-decoration:none;
+    box-sizing:content-box;
+    padding:0 20px 0 20px;
+}
+.content-top-menu .menu a:hover{
+    background-color:#aaa;
+}
+.active{
+    background-color:#aaa;
+}
+.content-top .set{
+    float: right;
+    width:6%;
+    height:100%;
+    background-color:black;
+}
+.content-footer{
+    width:100%;
+    height:auto;
+    box-sizing:border-box;
+    padding:0 20px;
+}
+.content-footer-left,.content-footer-right{
+    float: left;
+}
+.content-footer .title{
+    text-align: left;
+    height:38px;
+    width:100%;
+}
+.left-text,.left-sloid{
+    display:inline-block;
+}
+.left-text{
+    color:#ccc;
+    font-size:13px;
+    padding-top:21px;
+}
+.left-sloid{
+    width:172px;
+    height:1px;
+    background-color:#fff;
+    vertical-align:middle;
+}
+.tubiao{
+    display:inline-block;
+    width:12px;
+    height:14px;
+    margin:0 6px;
+    background:url(../img/1.png) no-repeat -45px -1px;
+}
+.left-news{
+    width:538px;
+    border-bottom:1px #fff solid;
+}
+.left-news .news{
+    width: 100%;
+    height:222px;
+}
+.left-news .news .news-title h2{
+    width:538px;
+    height:53px;
+    box-sizing:border-box;
+    padding-top:20px;
+    padding-bottom: 13px;
+}
+.news-imgs,.news-imgs ul,.news-imgs ul li{
+    height:119px;
+
+}
+.news-imgs ul{
+    float: left;
+}
+.news-imgs ul li{
+    width:179px;
+    height:100%;
+    list-style:none;
+}
+.news-imgs ul li img{
+    width:100%;
+    height:100%;
+}
+.news-time{
+    width:538px;
+    height:50px;
+    box-sizing:border-box;
+    padding:13px 0;
+}
+.news-time span{
+   e:14px;
+    color:#ccc; font-siz
+}
+.content-footer-right{
+    width: 300px;
+    height:302px;
+    box-sizing:border-box;
+    padding:21px 0 0 10px;
+}
+.top-text{
+    height:30px;
+}
+.top-text-l{
+    display:inline-block;
+    font-weight: bold;
+}
+.top-text-r{
+    display:inline-block;
+    float: right;
+}
+.content-footer-right li{
+    list-style:none;
+    float: left;
+    width:145px;
+    height:34px;
+    font-size:13px;
+    color:#444;
+}
+.footer{
+    position:relative;
+    bottom: 0px;
+    margin-top:20px;
+    padding-bottom:20px;
+}
+.footer p{
+    font-size:12px;
+    color:#aaa;
+    text-align:center;
+}
